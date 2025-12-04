@@ -1,0 +1,22 @@
+gitsetup:
+	- git config --global credential.modalPrompt false 
+	- git config --global user.email "email@example.com"
+	- git config --global user.name "user name"
+	- git config  user.email "email@example.com"
+	- git config  user.name "user name"
+	- git config  credential.modalPrompt false
+	- git remote set-url origin <repo_url>
+
+git:
+	- git add -A .
+	- git commit -m "$(msg)"
+	- git push -u  origin main
+
+migration_create:
+	- npx typeorm-ts-node-commonjs migration:create ./src/database/migrations/$(name)
+
+migration_revert:
+	- npx typeorm-ts-node-commonjs migration:revert -d ./src/database/orm-config.ts
+
+migration_generate:
+	- npx typeorm-ts-node-commonjs  migration:generate -d ./src/database/orm-config.ts  ./src/database/migrations/$(name)

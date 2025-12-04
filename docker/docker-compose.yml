@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: pen2_postgres17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER_NAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-todo_app}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data # Persist data in a local directory
+      - ./import_files:/import_files # Mount import files directory for direct use of copy commands
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER_NAME:-postgres} -d ${DB_NAME:-todo_app}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
