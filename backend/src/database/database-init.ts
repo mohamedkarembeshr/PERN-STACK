@@ -85,7 +85,7 @@ class DatabaseInit {
         const resTableExist = await this.doesTableExist(
           pgConfig,
           dbOptions.database,
-          'tasks',
+          'todos',
         );
         // if no tables status true
         if (!resTableExist) {

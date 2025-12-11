@@ -27,6 +27,12 @@ export default function MainLayout({
               >
                 Todos
               </Link>
+                <Link 
+                href="/users" 
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Users
+              </Link>
               <Link 
                 href="/documents" 
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
